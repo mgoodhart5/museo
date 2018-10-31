@@ -5,6 +5,10 @@ require './lib/curator'
 require './lib/photograph'
 require './lib/artist'
 require './lib/file_io'
+require 'csv'
+require_relative '../photographs.csv'
+
+# why did i forget how to load csv files!?!?!?
 
 class CuratorTest < Minitest::Test
   def test_that_it_exists
@@ -321,6 +325,6 @@ class CuratorTest < Minitest::Test
     curator = Curator.new
 
 
-    assert_instance_of Photograph, curator.load_photographs('./lib/file_io.rb')
+    assert_instance_of Photograph, curator.load_photographs('./photographs.csv')
   end
 end

@@ -1,4 +1,5 @@
 require './lib/file_io'
+require 'csv'
 
 class Curator
   attr_reader :artists, :photographs
@@ -62,6 +63,7 @@ class Curator
   end
 
   def load_photographs(file_path)
+    binding.pry
     #file path isn't really realllly working
     FileIO.load_photographs(file_path)
   end

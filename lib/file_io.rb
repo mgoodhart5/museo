@@ -1,4 +1,5 @@
 require 'csv'
+require './lib/curator.rb'
 
 class FileIO
   def self.load_artists(file)
