@@ -65,7 +65,9 @@ class Curator
   def load_photographs(file_path)
     binding.pry
     #file path isn't really realllly working
-    FileIO.load_photographs(file_path)
+    @photographs << FileIO.load_photographs(file_path)
+    # it just isn't loading properly
+    #
   end
 
 end
