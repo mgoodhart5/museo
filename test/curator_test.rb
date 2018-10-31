@@ -254,7 +254,6 @@ class CuratorTest < Minitest::Test
   end
 
   def test_that_it_can_find_photos_by_artists_countries
-    skip
     curator = Curator.new
     photo_1 = Photograph.new({
       id: "1",
@@ -311,9 +310,9 @@ class CuratorTest < Minitest::Test
     selected_photos_1 = curator.photographs_taken_by_artists_from("United States")
 
     assert_equal 3, selected_photos_1.length
-
+    binding.pry
     selected_photos_2 = curator.photographs_taken_by_artists_from("Argentina")
 
-    assert_equal 0, selected_photos_1.length
+    assert_equal 0, selected_photos_2.length
   end
 end
