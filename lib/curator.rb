@@ -1,3 +1,5 @@
+require './lib/file_io'
+
 class Curator
   attr_reader :artists, :photographs
 
@@ -57,6 +59,11 @@ class Curator
       end
     end
     artist_photos
+  end
+
+  def load_photographs(file_path)
+    #file path isn't really realllly working
+    FileIO.load_photographs(file_path)
   end
 
 end

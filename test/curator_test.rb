@@ -4,6 +4,7 @@ require 'pry'
 require './lib/curator'
 require './lib/photograph'
 require './lib/artist'
+require './lib/file_io'
 
 class CuratorTest < Minitest::Test
   def test_that_it_exists
@@ -310,9 +311,16 @@ class CuratorTest < Minitest::Test
     selected_photos_1 = curator.photographs_taken_by_artists_from("United States")
 
     assert_equal 3, selected_photos_1.length
-    binding.pry
+
     selected_photos_2 = curator.photographs_taken_by_artists_from("Argentina")
 
     assert_equal 0, selected_photos_2.length
+  end
+
+  def test_that_it_can_add_photos_from_a_csv_file
+    curator = Curator.new
+
+
+    assert_instance_of Photograph, curator.load_photographs('./lib/file_io.rb')
   end
 end
