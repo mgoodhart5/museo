@@ -189,9 +189,131 @@ class CuratorTest < Minitest::Test
     curator.add_artist(artist_2)
     curator.add_artist(artist_3)
     diane_arbus = curator.find_artist_by_id("3")
-
     selected_photos = curator.find_photographs_by_artist(diane_arbus)
 
     assert_equal [photo_3, photo_4], selected_photos
+  end
+
+  def test_that_it_can_return_all_artists_with_more_than_one_photo
+    curator = Curator.new
+    photo_1 = Photograph.new({
+      id: "1",
+      name: "Rue Mouffetard, Paris (Boy with Bottles)",
+      artist_id: "1",
+      year: "1954"
+    })
+    photo_2 = Photograph.new({
+      id: "2",
+      name: "Moonrise, Hernandez",
+      artist_id: "2",
+      year: "1941"
+    })
+    photo_3 = Photograph.new({
+      id: "3",
+      name: "Identical Twins, Roselle, New Jersey",
+      artist_id: "3",
+      year: "1967"
+    })
+    photo_4 = Photograph.new({
+      id: "4",
+      name: "Child with Toy Hand Grenade in Central Park",
+      artist_id: "3",
+      year: "1962"
+    })
+    artist_1 = Artist.new({
+      id: "1",
+      name: "Henri Cartier-Bresson",
+      born: "1908",
+      died: "2004",
+      country: "France"
+    })
+    artist_2 = Artist.new({
+      id: "2",
+      name: "Ansel Adams",
+      born: "1902",
+      died: "1984",
+      country: "United States"
+    })
+    artist_3 = Artist.new({
+      id: "3",
+      name: "Diane Arbus",
+      born: "1923",
+      died: "1971",
+      country: "United States"
+    })
+    curator.add_photograph(photo_1)
+    curator.add_photograph(photo_2)
+    curator.add_photograph(photo_3)
+    curator.add_photograph(photo_4)
+    curator.add_artist(artist_1)
+    curator.add_artist(artist_2)
+    curator.add_artist(artist_3)
+
+    assert_equal 1, curator.artists_with_multiple_photographs.length
+    assert_equal [artist_3], curator.artists_with_multiple_photographs
+  end
+
+  def test_that_it_can_find_photos_by_artists_countries
+    skip
+    curator = Curator.new
+    photo_1 = Photograph.new({
+      id: "1",
+      name: "Rue Mouffetard, Paris (Boy with Bottles)",
+      artist_id: "1",
+      year: "1954"
+    })
+    photo_2 = Photograph.new({
+      id: "2",
+      name: "Moonrise, Hernandez",
+      artist_id: "2",
+      year: "1941"
+    })
+    photo_3 = Photograph.new({
+      id: "3",
+      name: "Identical Twins, Roselle, New Jersey",
+      artist_id: "3",
+      year: "1967"
+    })
+    photo_4 = Photograph.new({
+      id: "4",
+      name: "Child with Toy Hand Grenade in Central Park",
+      artist_id: "3",
+      year: "1962"
+    })
+    artist_1 = Artist.new({
+      id: "1",
+      name: "Henri Cartier-Bresson",
+      born: "1908",
+      died: "2004",
+      country: "France"
+    })
+    artist_2 = Artist.new({
+      id: "2",
+      name: "Ansel Adams",
+      born: "1902",
+      died: "1984",
+      country: "United States"
+    })
+    artist_3 = Artist.new({
+      id: "3",
+      name: "Diane Arbus",
+      born: "1923",
+      died: "1971",
+      country: "United States"
+    })
+    curator.add_photograph(photo_1)
+    curator.add_photograph(photo_2)
+    curator.add_photograph(photo_3)
+    curator.add_photograph(photo_4)
+    curator.add_artist(artist_1)
+    curator.add_artist(artist_2)
+    curator.add_artist(artist_3)
+    selected_photos_1 = curator.photographs_taken_by_artists_from("United States")
+
+    assert_equal 3, selected_photos_1.length
+
+    selected_photos_2 = curator.photographs_taken_by_artists_from("Argentina")
+
+    assert_equal 0, selected_photos_1.length
   end
 end
