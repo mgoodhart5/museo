@@ -10,11 +10,11 @@ class Curator
   end
 
   def add_photograph(photograph)
-    @photographs << photograph
+    @photographs << Photograph.new(photograph)
   end
 
   def add_artist(artist)
-    @artists << artist
+    @artists << Artist.new(artist)
   end
 
   def find_artist_by_id(id)
@@ -62,12 +62,12 @@ class Curator
     artist_photos
   end
 
-  def load_photographs(file_path)
-    binding.pry
-    #file path isn't really realllly working
-    @photographs << FileIO.load_photographs(file_path)
-    # it just isn't loading properly
-    #
-  end
+  # def load_photographs(file_path)
+  #   binding.pry
+  #   #file path isn't really realllly working
+  #   @photographs << FileIO.load_photographs(file_path)
+  #   # it just isn't loading properly
+  #   #
+  # end
 
 end
